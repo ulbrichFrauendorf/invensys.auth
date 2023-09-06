@@ -7,14 +7,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace invensys.auth.application
+namespace invensys.auth.application;
+
+public static class ServiceRestristrar
 {
-    public static class ServiceRestristrar
+    public static void ConfigureApplication(this IServiceCollection services)
     {
-        public static void ConfigureApplication(this IServiceCollection services)
-        {
-            services.AddMediatR(x => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        }
+        services.AddMediatR(x => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 }

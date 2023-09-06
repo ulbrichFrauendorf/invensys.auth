@@ -1,29 +1,33 @@
 ﻿using AutoMapper;
-using invensys.auth.infrastructure.Persistance;
+using AutoMapper.QueryableExtensions;
+using invensys.auth.application.Common.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using invensys.auth.application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace invensys.auth.application.Endpoints.AuthClients.Queries
+namespace invensys.auth.application.Endpoints.AuthClients.Queries;
+
+public record GetAuthClientsQuery : IRequest<AuthClientDto>
 {
-    public class GetAuthClientsQuery : IRequest<AuthClientDTO>
+    public Guid ClientId { get; init; }
+}
+
+public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, AuthClientDto>
+{
+    private readonly IAuthenticationServerContext _context;
+    private readonly IMapper _mapper;
+
+    public GetAuthClientQueryHandler(IAuthenticationServerContext context, IMapper mapper)
     {
-        public Guid ClientId { get; init; }
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, AuthClientDTO>
+    public async Task<AuthClientDto> Handle(GetAuthClientsQuery request, CancellationToken cancellationToken)
     {
-        public GetAuthClientQueryHandler(AuthenticationServerContext context, IMapper mapper)
-        {
-
-        }
-
-        public Task<AuthClientDTO> Handle(GetAuthClientsQuery request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        return await _context.AuthClients
+                   .ProjectTo<AuthClientDto>(_mapper.ConfigurationProvider)
+                   .FirstOrDefaultAsync(s => s.Id == request.ClientId, cancellationToken) ??
+               throw new NullQueryResultException();
     }
 }

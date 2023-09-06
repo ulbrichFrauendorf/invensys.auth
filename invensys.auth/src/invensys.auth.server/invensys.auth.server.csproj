@@ -30,4 +30,8 @@
     <ProjectReference Include="..\invensys.auth.infrastructure\invensys.auth.infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\" />
+  </ItemGroup>
+
 </Project>

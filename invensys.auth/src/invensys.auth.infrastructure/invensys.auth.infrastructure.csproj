@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\invensys.auth.application\invensys.auth.application.csproj" />
     <ProjectReference Include="..\invensys.auth.domain\invensys.auth.domain.csproj" />
   </ItemGroup>
 

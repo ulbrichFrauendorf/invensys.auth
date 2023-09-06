@@ -1,20 +1,19 @@
 ﻿using AutoMapper;
 using invensys.auth.domain;
 
-namespace invensys.auth.application.Endpoints.AuthClients
-{
-    public record AuthClientDTO
-    {
-        public Guid Id { get; init; }
-        public string? Name { get; init; }
-        public string? SecretHash { get; init; }
+namespace invensys.auth.application.Endpoints.AuthClients.Queries;
 
-        private class Mapping : Profile
+public class AuthClientDto
+{
+    public Guid Id { get; init; }
+    public string Name { get; init; } = null!;
+    public string SecretHash { get; init; } = null!;
+
+    private class Mapping : Profile
+    {
+        public Mapping()
         {
-            public Mapping()
-            {
-                CreateMap<AuthClient, AuthClientDTO>();
-            }
+            CreateMap<AuthClient, AuthClientDto>();
         }
     }
 }

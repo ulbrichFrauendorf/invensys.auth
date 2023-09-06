@@ -2,6 +2,7 @@ using invensys.auth.infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using invensys.auth.application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.ConfigureInfrastructure(builder.Configuration);
+builder.Services.ConfigureApplication();
 
 builder.Services.AddAuthentication(options =>
 {

@@ -9,11 +9,11 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\invensys.auth.domain\invensys.auth.domain.csproj" />
-    <ProjectReference Include="..\invensys.auth.infrastructure\invensys.auth.infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
