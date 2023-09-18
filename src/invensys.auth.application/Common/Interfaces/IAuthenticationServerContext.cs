@@ -5,5 +5,6 @@ namespace invensys.auth.application.Common.Interfaces;
 
 public interface IAuthenticationServerContext
 {
-    DbSet<AuthClient> AuthClients { get; set; }
+    DbSet<AuthClient> AuthClients { get; }
+    DbSet<AuthUser> AuthUsers { get; }
 }

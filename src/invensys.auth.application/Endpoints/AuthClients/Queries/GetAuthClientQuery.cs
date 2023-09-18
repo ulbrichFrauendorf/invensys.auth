@@ -25,9 +25,9 @@ public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, Au
 
     public async Task<AuthClientDto> Handle(GetAuthClientsQuery request, CancellationToken cancellationToken)
     {
-        return await _context.AuthClients
-                   .ProjectTo<AuthClientDto>(_mapper.ConfigurationProvider)
-                   .FirstOrDefaultAsync(s => s.AuthClientId == request.ClientId, cancellationToken) ??
-               throw new NullQueryResultException();
+        var authClient = await _context.AuthClients
+            .FirstOrDefaultAsync(s => s.AuthClientId == request.ClientId, cancellationToken);
+        
+        return _mapper.Map<AuthClientDto>(authClient);
     }
 }

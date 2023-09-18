@@ -13,23 +13,14 @@ namespace invensys.auth.server.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 
-public class AuthController : ControllerBase
+public class AuthController : ApiControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly IMediator _mediator;
-
-    public AuthController(IConfiguration configuration, IMediator mediator)
-    {
-        _configuration = configuration;
-        _mediator = mediator;
-    }
-
     [HttpPost]
     public async Task<IResult> Token([FromForm] AuthTokenRequest request)
     {
         if (request.grant_type == "client_credentials")
         {
-            var client = await _mediator.Send(new GetAuthClientsQuery { ClientId = request.client_id });
+            var client = await Mediator.Send(new GetAuthClientsQuery { ClientId = request.client_id });
 
             var dbClientSecret = EncryptionService.Encrypt(request.client_secret);
             var clientSecret = EncryptionService.Decrypt(client.SecretHash);
@@ -38,14 +29,10 @@ public class AuthController : ControllerBase
                 return Results.Unauthorized();
             }
             
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = client.Url
+            var issuer = Configuration["Jwt:Issuer"];
+            var audience = client.Url;
             var key = Encoding.ASCII.GetBytes(clientSecret);
-
-
-            issuer = "https://invensys.auth.server";
-            audience = "https://mondtes.co.za";
-
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]

@@ -17,7 +17,8 @@ public class AuthenticationServerContext: DbContext, IAuthenticationServerContex
 
     }
 
-    public DbSet<AuthClient> AuthClients { get; set; }
+    public required DbSet<AuthClient> AuthClients { get; set; }
+    public required DbSet<AuthUser> AuthUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,6 +27,9 @@ public class AuthenticationServerContext: DbContext, IAuthenticationServerContex
         modelBuilder.Entity<AuthClient>().Property(m => m.SecretHash).IsRequired();
         modelBuilder.Entity<AuthClient>().Property(m => m.Name).IsRequired();
 
+        modelBuilder.Entity<AuthUser>().Property(m => m.AuthUserId).IsRequired();
+        modelBuilder.Entity<AuthUser>().Property(m => m.UserName).IsRequired();
+        
         base.OnModelCreating(modelBuilder);
     }
 }

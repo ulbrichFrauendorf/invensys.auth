@@ -1,0 +1,1 @@
+dotnet ef migrations add "Added" --verbose --project invensys.auth.infrastructure --startup-project invensys.auth.server
