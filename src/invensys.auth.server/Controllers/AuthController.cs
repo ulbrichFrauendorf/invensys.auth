@@ -29,8 +29,9 @@ public class AuthController : ControllerBase
     {
         if (request.grant_type == "client_credentials")
         {
-            var client = await _mediator.Send(new GetAuthClientsQuery { ClientId = new Guid(request.client_id) });
+            var client = await _mediator.Send(new GetAuthClientsQuery { ClientId = request.client_id });
 
+            var dbClientSecret = EncryptionService.Encrypt(request.client_secret);
             var clientSecret = EncryptionService.Decrypt(client.SecretHash);
             if (request.client_secret != clientSecret)
             {
@@ -38,8 +39,12 @@ public class AuthController : ControllerBase
             }
             
             var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
+            var audience = client.Url
+            var key = Encoding.ASCII.GetBytes(clientSecret);
+
+
+            issuer = "https://invensys.auth.server";
+            audience = "https://mondtes.co.za";
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

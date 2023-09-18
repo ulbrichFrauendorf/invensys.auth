@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using invensys.auth.application.Common.Exceptions;
-using MediatR;
 using invensys.auth.application.Common.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace invensys.auth.application.Endpoints.AuthClients.Queries;
 
 public record GetAuthClientsQuery : IRequest<AuthClientDto>
 {
-    public Guid ClientId { get; init; }
+    public string? ClientId { get; init; }
 }
 
 public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, AuthClientDto>
@@ -27,7 +27,7 @@ public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, Au
     {
         return await _context.AuthClients
                    .ProjectTo<AuthClientDto>(_mapper.ConfigurationProvider)
-                   .FirstOrDefaultAsync(s => s.Id == request.ClientId, cancellationToken) ??
+                   .FirstOrDefaultAsync(s => s.AuthClientId == request.ClientId, cancellationToken) ??
                throw new NullQueryResultException();
     }
 }

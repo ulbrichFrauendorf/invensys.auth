@@ -1,14 +1,10 @@
-﻿using invensys.auth.infrastructure.Persistence;
+﻿using invensys.auth.application.Common.Interfaces;
+using invensys.auth.infrastructure.ExternalApi;
+using invensys.auth.infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using invensys.auth.application.Common.Interfaces;
 
 namespace invensys.auth.infrastructure;
 
@@ -21,9 +17,11 @@ public static class ServiceRestristrar
         {
             _ = options.UseSqlServer(connectionString);
         });
-            
-        services.AddScoped<IAuthenticationServerContext>(provider => provider.GetRequiredService<AuthenticationServerContext>());
 
+        _ = services.AddScoped<IAuthenticationServerContext>(provider => provider.GetRequiredService<AuthenticationServerContext>());
+
+        _ = services.AddHttpClient();
+        _ = services.AddSingleton<ISage300Api, Sage300Api>();
     }
 }
 

@@ -5,9 +5,9 @@ namespace invensys.auth.application.Endpoints.AuthClients.Queries;
 
 public class AuthClientDto
 {
-    public Guid Id { get; init; }
-    public string Name { get; init; } = null!;
-    public string SecretHash { get; init; } = null!;
+    public string? AuthClientId { get; init; }
+    public string? Name { get; init; }
+    public string? SecretHash { get; init; }
 
     private class Mapping : Profile
     {
