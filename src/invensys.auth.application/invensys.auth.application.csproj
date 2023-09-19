@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Endpoints\AuthClients\Commands\" />
-    <Folder Include="Endpoints\AuthUsers\Commands\" />
   </ItemGroup>
 
 </Project>

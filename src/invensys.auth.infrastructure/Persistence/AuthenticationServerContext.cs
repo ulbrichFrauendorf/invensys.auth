@@ -20,6 +20,11 @@ public class AuthenticationServerContext: DbContext, IAuthenticationServerContex
     public required DbSet<AuthClient> AuthClients { get; set; }
     public required DbSet<AuthUser> AuthUsers { get; set; }
 
+    public async Task SaveChangesAsync()
+    {
+        await SaveChangesAsync();
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AuthClient>().Property(m => m.AuthClientId).IsRequired();

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using invensys.auth.infrastructure.Persistence;
 
@@ -10,9 +11,11 @@ using invensys.auth.infrastructure.Persistence;
 namespace invensys.auth.infrastructure.Migrations
 {
     [DbContext(typeof(AuthenticationServerContext))]
-    partial class AuthenticationServerContextModelSnapshot : ModelSnapshot
+    [Migration("20230919054327_Rework_User_Password")]
+    partial class Rework_User_Password
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

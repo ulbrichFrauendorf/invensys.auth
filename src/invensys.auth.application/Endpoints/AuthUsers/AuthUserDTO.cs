@@ -7,7 +7,6 @@ public class AuthUserDTO
 {
     public string? AuthUserId { get; init; }
     public string? UserName { get; init;}
-    public string? PasswordHash { get; init; }
 
     private class Mapping : Profile
     {
