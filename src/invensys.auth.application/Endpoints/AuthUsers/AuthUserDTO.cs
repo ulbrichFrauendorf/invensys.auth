@@ -5,13 +5,11 @@ namespace invensys.auth.application.Endpoints.AuthUsers;
 
 public class AuthUserDTO
 {
-    public string? AuthUserId { get; init; }
-    public string? UserName { get; init;}
+    public string AuthUserId { get; init; }
+    public string UserName { get; init;}
     
-    public byte[]? PasswordHash { get; init;}
+    public string AccessToken { get; set;}
     
-    public byte[]? PasswordSalt { get; init;}
-
     private class Mapping : Profile
     {
         public Mapping()

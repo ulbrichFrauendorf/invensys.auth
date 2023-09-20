@@ -1,0 +1,17 @@
+<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+    <h2>Register</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your username" name="username"
+        [(ngModel)] ="model.username">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="password" placeholder="Enter your password" name="password"
+        [(ngModel)] ="model.password">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Register</button>
+    <button mat-raised-button color="primary" type="submit" (click)="cancel()">Cancel</button>
+</form> 

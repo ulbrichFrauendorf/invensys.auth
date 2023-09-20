@@ -1,8 +1,6 @@
 using invensys.auth.infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using invensys.auth.application;
+using invensys.auth.server.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,28 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureInfrastructure(builder.Configuration);
 builder.Services.ConfigureApplication();
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
-{
-    o.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
-    };
-});
-
-builder.Services.AddAuthorization();
+builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -56,10 +33,9 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors();
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.UseInfrastructure();
+app.UseIdentityServices();
 
 app.MapControllers();
 
