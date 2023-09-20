@@ -2,18 +2,16 @@
 using invensys.auth.application.Common.Interfaces;
 using invensys.auth.domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using FluentValidation;
 
 namespace invensys.auth.application.Endpoints.AuthUsers.Commands;
 public record CreateAuthUserCommand: IRequest<AuthUserDTO>
 {
-    public string? UserName { get; init; }
-    public string? Password { get; init; }
+    [Required] public string? UserName { get; }
+    [Required] public string? Password { get; }
 }
 
 public class CreateAuthUserCommandHandler : EndpointHandler, IRequestHandler<CreateAuthUserCommand, AuthUserDTO>
@@ -28,15 +26,26 @@ public class CreateAuthUserCommandHandler : EndpointHandler, IRequestHandler<Cre
 
         var authUser = new AuthUser
         {
-            AuthUserId = new Guid().ToString(),
+            AuthUserId = Guid.NewGuid().ToString(),
             UserName = request.UserName,
             PasswordHash = hMac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
             PasswordSalt = hMac.Key
         };
 
         _context.AuthUsers.Add(authUser);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return _mapper.Map<AuthUserDTO>(authUser);
+    }
+}
+
+public class CreateTodoItemCommandValidator : AbstractValidator<CreateAuthUserCommand>
+{
+    public CreateTodoItemCommandValidator()
+    {
+        RuleFor(v => v.UserName)
+            .MaximumLength(200)
+            .EmailAddress()
+            .NotEmpty();
     }
 }

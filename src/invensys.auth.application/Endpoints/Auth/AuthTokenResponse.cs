@@ -1,4 +1,4 @@
-﻿namespace invensys.auth.application.Models;
+﻿namespace invensys.auth.application.Endpoints.Auth;
 
 public class AuthTokenResponse
 {

@@ -7,5 +7,5 @@ public interface IAuthenticationServerContext
 {
     DbSet<AuthClient> AuthClients { get; }
     DbSet<AuthUser> AuthUsers { get; }
-    Task SaveChangesAsync();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

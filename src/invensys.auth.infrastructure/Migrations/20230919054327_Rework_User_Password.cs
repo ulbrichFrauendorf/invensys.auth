@@ -10,13 +10,16 @@ namespace invensys.auth.infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<byte[]>(
+            migrationBuilder.DropColumn(
+                name: "PasswordHash",
+                table: "AuthUsers");
+            
+            migrationBuilder.AddColumn<byte[]>(
                 name: "PasswordHash",
                 table: "AuthUsers",
                 type: "varbinary(max)",
                 nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                defaultValue: new byte[0]);
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "PasswordSalt",
@@ -32,14 +35,10 @@ namespace invensys.auth.infrastructure.Migrations
             migrationBuilder.DropColumn(
                 name: "PasswordSalt",
                 table: "AuthUsers");
-
-            migrationBuilder.AlterColumn<string>(
+            
+            migrationBuilder.DropColumn(
                 name: "PasswordHash",
-                table: "AuthUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(byte[]),
-                oldType: "varbinary(max)");
+                table: "AuthUsers");
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using invensys.auth.application.Endpoints.AuthUsers;
 using invensys.auth.application.Endpoints.AuthUsers.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace invensys.auth.server.Controllers;
 
-public class AuthUserController: ApiControllerBase
+[Authorize]
+public class AuthUsersController: ApiControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<List<AuthUserDTO>>> GetUsers()

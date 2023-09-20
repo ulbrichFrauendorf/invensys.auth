@@ -7,7 +7,7 @@ namespace invensys.auth.application.Endpoints.AuthUsers.Queries;
 
 public record GetAuthUserQuery: IRequest<AuthUserDTO>
 {
-    public string? AuthUserId { get; init; }
+    public string AuthUserId { get; init; }
 }
 
 public class GetAuthUserQueryHandler : EndpointHandler, IRequestHandler<GetAuthUserQuery, AuthUserDTO>

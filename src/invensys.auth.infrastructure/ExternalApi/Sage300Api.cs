@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using invensys.auth.application.Common.Interfaces;
 
 namespace invensys.auth.infrastructure.ExternalApi;
 

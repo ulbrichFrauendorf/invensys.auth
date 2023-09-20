@@ -1,5 +1,5 @@
-﻿using invensys.auth.application.Models;
-using invensys.auth.infrastructure.ExternalApi;
+﻿using invensys.auth.application.Common.Interfaces;
+using invensys.auth.application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +17,7 @@ public class ExternalApiController : Controller
         this.sage300Api = sage300Api;
     }
 
+    [HttpGet]
     public async Task<IResult> GetMappedResult([FromQuery] ExternalApiRequest externalApiRequest)
     {
         var response = await sage300Api.GetPayloadAsync(externalApiRequest.BaseUrl, externalApiRequest.RequestUrl, externalApiRequest.ApiSecret);

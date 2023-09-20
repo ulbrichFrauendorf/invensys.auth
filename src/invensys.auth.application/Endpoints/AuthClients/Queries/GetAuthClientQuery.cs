@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using invensys.auth.application.Common.Exceptions;
 using invensys.auth.application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +7,7 @@ namespace invensys.auth.application.Endpoints.AuthClients.Queries;
 
 public record GetAuthClientsQuery : IRequest<AuthClientDto>
 {
-    public string? ClientId { get; init; }
+    public string? ClientId { get; }
 }
 
 public class GetAuthClientQueryHandler : IRequestHandler<GetAuthClientsQuery, AuthClientDto>

@@ -1,4 +1,4 @@
-﻿namespace invensys.auth.infrastructure.ExternalApi;
+﻿namespace invensys.auth.application.Common.Interfaces;
 
 public interface ISage300Api
 {
