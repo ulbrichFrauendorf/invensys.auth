@@ -11,7 +11,7 @@ namespace invensys.auth.server.Controllers;
 public class AuthController : ApiControllerBase
 {
     [HttpPost("token")]
-    public async Task<IResult> Token([FromForm] GetAuthTokenQuery authTokenQuery)
+    public async Task<IResult> Token([FromForm] GetClientCredentialsAuthTokenQuery authTokenQuery)
     {
         var authTokenResponse = await Mediator.Send(authTokenQuery);
         if (!string.IsNullOrWhiteSpace(authTokenResponse.access_token))
@@ -30,12 +30,8 @@ public class AuthController : ApiControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<AuthUserDTO>> Login(GetAuthUserByNameQuery getAuthUserByNameQuery)
+    public async Task<ActionResult<AuthUserDTO>> Login(GetPasswordAuthTokenQuery getAuthUserByNameQuery)
     {
-        var user = await Mediator.Send(getAuthUserByNameQuery);
-
-        
-
-        return user;
+        return await Mediator.Send(getAuthUserByNameQuery);
     }
 }

@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { MatSidenav } from '@angular/material/sidenav';
+import { AccountService } from '../_services/account.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +14,7 @@ export class NavComponent implements AfterViewInit {
     
     @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-    constructor(private observer: BreakpointObserver) {}
+    constructor(private observer: BreakpointObserver, public accountService: AccountService, public dialog: MatDialog) {}
 
     
     ngAfterViewInit(): void {
@@ -25,4 +28,12 @@ export class NavComponent implements AfterViewInit {
           }
         });
       }
+
+      login() {       
+        const dialogRef = this.dialog.open(LoginComponent);
+    }
+
+    logout(){
+        this.accountService.logout();
+    }
 }

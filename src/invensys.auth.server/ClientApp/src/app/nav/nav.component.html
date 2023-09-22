@@ -1,35 +1,25 @@
 <mat-toolbar>
-    <button
-    mat-icon-button
-    *ngIf="sidenav.mode === 'over'"
-    (click)="sidenav.toggle()"
-    >
-    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-  </button>
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
 
-Invensys Auth
-<div class="toolbar-menu-button-container">
-    <button mat-button class="toolbar-menu-button">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-      </button>
-      <button mat-button class="toolbar-menu-button">
-        <mat-icon>person</mat-icon>
-        <span>Profile</span>
-      </button>
-      <button mat-button class="toolbar-menu-button">
-        <mat-icon>info</mat-icon>
-        <span>About</span>
-      </button>
-    
-      <mat-divider></mat-divider>
-    
-      <button mat-button class="toolbar-menu-button">
-        <mat-icon>help</mat-icon>
-        <span>Help</span>
-      </button>
-</div>
+    Invensys Auth
+    <div class="toolbar-menu-button-container">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Profile">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="!(accountService.currentAuthUser$ | async)" (click)="login()">
+              <mat-icon>login</mat-icon>
+              <span>Login</span>
+            </button>
+            <button mat-menu-item *ngIf="(accountService.currentAuthUser$ | async)" (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+    </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -37,27 +27,27 @@ Invensys Auth
         <button mat-button class="menu-button">
             <mat-icon>home</mat-icon>
             <span>Home</span>
-          </button>
-          <button mat-button class="menu-button">
+        </button>
+        <button mat-button class="menu-button">
             <mat-icon>person</mat-icon>
             <span>Profile</span>
-          </button>
-          <button mat-button class="menu-button">
+        </button>
+        <button mat-button class="menu-button">
             <mat-icon>info</mat-icon>
             <span>About</span>
-          </button>
-        
-          <mat-divider></mat-divider>
-        
-          <button mat-button class="menu-button">
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button">
             <mat-icon>help</mat-icon>
             <span>Help</span>
-          </button>
+        </button>
     </mat-sidenav>
-    
+
     <mat-sidenav-content>
-        <div class="content mat-elevation">
-            <app-login></app-login>
+        <div class="content mat-elevation-z8">
+            <app-landing-dashboard></app-landing-dashboard>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

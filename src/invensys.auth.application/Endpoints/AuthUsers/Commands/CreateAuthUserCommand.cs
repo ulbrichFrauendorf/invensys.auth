@@ -10,8 +10,8 @@ using FluentValidation;
 namespace invensys.auth.application.Endpoints.AuthUsers.Commands;
 public record CreateAuthUserCommand: IRequest<AuthUserDTO>
 {
-    [Required] public string UserName { get; }
-    [Required] public string Password { get; }
+    [Required] public string UserName { get; init; }
+    [Required] public string Password { get; init; }
 }
 
 public class CreateAuthUserCommandHandler : EndpointHandler, IRequestHandler<CreateAuthUserCommand, AuthUserDTO>

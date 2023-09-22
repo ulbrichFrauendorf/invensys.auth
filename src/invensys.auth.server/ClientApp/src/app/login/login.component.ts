@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -8,23 +9,20 @@ import { AccountService } from '../_services/account.service';
 })
 export class LoginComponent implements OnInit {
     model: any = {};
-    userIsLoggedIn = false;
 
-    constructor(private accountService: AccountService) {}
+    constructor(public accountService: AccountService, public dialogRef: MatDialogRef<LoginComponent>) {}
 
     ngOnInit(): void {
-        
     }
 
-    login() {
-        console.log(this.model);
-        
+    login() {       
         this.accountService.login(this.model).subscribe({
-            next: response => {
-                console.log(response);
-                this.userIsLoggedIn = true;
-            },
-            error: error => console.log(error)            
-        })
+            next: res => console.log(res)
+        });
+        this.dialogRef.close();
     }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+      }
 }

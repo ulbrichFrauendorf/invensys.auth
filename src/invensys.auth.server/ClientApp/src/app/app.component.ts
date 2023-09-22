@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from './_services/account.service';
+import { AuthUser } from './_models/user';
 
 @Component({
     selector: 'app-root',
@@ -10,19 +12,20 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
     title = 'Invensys Authentication Server';
-    users: any;
-
-    constructor(private httpClient: HttpClient) {
+   
+    constructor(private httpClient: HttpClient, private accountService: AccountService) {
 
     }
 
     ngOnInit(): void {
-        this.httpClient.get('https://localhost:5001/api/authuser').subscribe(
-            {
-                next: response => this.users = response,
-                error: error => console.log(error),
-                complete: () => console.log('Completed request'),
-            }
-        )
+        this.setCurrentUser();
+    }
+
+    setCurrentUser(){
+        const userString = localStorage.getItem('user');
+        if(!userString) return;
+
+        const user: AuthUser = JSON.parse(userString);
+        this.accountService.setCurrentUser(user);
     }
 }

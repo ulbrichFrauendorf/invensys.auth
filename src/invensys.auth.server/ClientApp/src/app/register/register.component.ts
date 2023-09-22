@@ -1,22 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccountService } from '../_services/account.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
     model: any = {};
+    @Output() cancelRegister = new EventEmitter();
+
+    constructor(private accountService: AccountService) { }
 
     ngOnInit(): void {
-        
+
     }
 
     register(): void {
-        console.log(this.model);
+        this.accountService.register(this.model).subscribe({
+            next: () => {                
+                this.cancel();
+            },
+            error: err => {
+                console.error(err.error);
+            }
+        });
     }
 
     cancel(): void {
-        console.log(this.model);
+        this.cancelRegister.emit(false);
     }
 }

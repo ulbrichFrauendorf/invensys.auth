@@ -1,14 +1,18 @@
-<form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-    <h2>Login</h2>
-    <mat-form-field appearance="fill">
+<h2 mat-dialog-title>Login</h2>
+<mat-dialog-content >
+    <mat-form-field>
         <mat-label>User Name</mat-label>
-        <input matInput placeholder="Enter your username" name="userName" [(ngModel)] ="model.userName">
+        <input matInput placeholder="Enter your username" name="userName" [(ngModel)]="model.userName">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter your password" name="password" [(ngModel)] ="model.password">
+        <input matInput type="password" placeholder="Enter your password" name="password" [(ngModel)]="model.password">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Login</button>
-</form> 
+    <a></a>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="login()" cdkFocusInitial>Login</button>
+</div>

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace invensys.auth.server.Controllers;
 
-[Authorize]
+
 public class AuthUsersController: ApiControllerBase
 {
     [HttpGet]
