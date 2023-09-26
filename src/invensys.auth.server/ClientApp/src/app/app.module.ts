@@ -21,6 +21,9 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingDashboardComponent } from './landing-dashboard/landing-dashboard.component';
+import { ClientListComponent } from './clients/client-list/client-list.component';
+import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,10 @@ import { LandingDashboardComponent } from './landing-dashboard/landing-dashboard
         NavComponent,
         LoginComponent,
         RegisterComponent,
-        LandingDashboardComponent
+        LandingDashboardComponent,
+        ClientListComponent,
+        ClientDetailComponent,
+        UserDetailComponent
     ],
     imports: [
         BrowserModule,
