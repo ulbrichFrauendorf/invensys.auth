@@ -8,33 +8,33 @@
     <div class="toolbar-menu-button-container">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Profile">
             <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
+        </button>
+        <mat-menu #menu="matMenu">
             <button mat-menu-item *ngIf="!(accountService.currentAuthUser$ | async)" (click)="login()">
-              <mat-icon>login</mat-icon>
-              <span>Login</span>
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
             </button>
             <button mat-menu-item *ngIf="(accountService.currentAuthUser$ | async)" (click)="logout()">
-              <mat-icon>logout</mat-icon>
-              <span>Logout</span>
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
             </button>
-          </mat-menu>
+        </mat-menu>
     </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav">
-        <button mat-button class="menu-button">
+        <button routerLink="/dashboard" routerLinkActive="mat-accent" mat-button class="menu-button">
             <mat-icon>home</mat-icon>
             <span>Home</span>
         </button>
-        <button mat-button class="menu-button">
-            <mat-icon>person</mat-icon>
-            <span>Profile</span>
+        <button routerLink="/clients" routerLinkActive="mat-accent" mat-button class="menu-button">
+            <mat-icon>domain</mat-icon>
+            <span>Clients</span>
         </button>
-        <button mat-button class="menu-button">
-            <mat-icon>info</mat-icon>
-            <span>About</span>
+        <button routerLink="/users" routerLinkActive="mat-accent" mat-button class="menu-button">
+            <mat-icon>person</mat-icon>
+            <span>Users</span>
         </button>
 
         <mat-divider></mat-divider>
@@ -47,7 +47,6 @@
 
     <mat-sidenav-content>
         <div class="content mat-elevation-z8">
-            <div>Hello</div>
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

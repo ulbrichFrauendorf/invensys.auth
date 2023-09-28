@@ -16,27 +16,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { LandingDashboardComponent } from './landing-dashboard/landing-dashboard.component';
-import { ClientListComponent } from './clients/client-list/client-list.component';
-import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
-import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { NavComponent } from './layouts/nav/nav.component';
+import { ClientDetailComponent } from './modules/administration/components/clients/client-detail/client-detail.component';
+import { UserDetailComponent } from './modules/administration/components/users/user-detail/user-detail.component';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { UserListComponent } from './modules/administration/components/users/user-list/user-list.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         NavComponent,
-        LoginComponent,
-        RegisterComponent,
-        LandingDashboardComponent,
-        ClientListComponent,
         ClientDetailComponent,
-        UserDetailComponent
+        UserDetailComponent,
+        UserListComponent
     ],
     imports: [
+        AuthenticationModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
@@ -48,11 +45,11 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
         MatListModule,
         MatButtonModule,
         MatIconModule,
-        MatInputModule,
-        MatDialogModule,
-        FormsModule,
+        MatDialogModule
     ],
-    providers: [],
+    providers: [
+        MatSnackBar
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

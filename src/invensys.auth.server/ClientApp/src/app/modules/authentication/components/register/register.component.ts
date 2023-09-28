@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../../services/account.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
     register(): void {
         this.accountService.register(this.model).subscribe({
-            next: () => {                
+            next: () => {
                 this.cancel();
             },
             error: err => {

@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
-import { ClientListComponent } from './clients/client-list/client-list.component';
-import { LandingDashboardComponent } from './landing-dashboard/landing-dashboard.component';
-import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { ClientDetailComponent } from './modules/administration/components/clients/client-detail/client-detail.component';
+import { UserDetailComponent } from './modules/administration/components/users/user-detail/user-detail.component';
+import { DashboardComponent } from './modules/landing-dashboard/pages/dashboard/dashboard.component';
+import { ClientListComponent } from './modules/administration/components/clients/client-list/client-list.component';
+import { UserListComponent } from './modules/administration/components/users/user-list/user-list.component';
 
 const routes: Routes = [
-  {path: '', component: LandingDashboardComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'clients', component: ClientListComponent},
   {path: 'clients/:id', component: ClientDetailComponent},
+  {path: 'users', component: UserListComponent},
   {path: 'users/:id', component: UserDetailComponent},
-  {path: '**', component: LandingDashboardComponent, pathMatch: 'full'},
-  
+  {path: '**', component: DashboardComponent, pathMatch: 'full'},
+
 ];
 
 @NgModule({

@@ -14,10 +14,7 @@ public class AuthController : ApiControllerBase
     public async Task<IResult> Token([FromForm] GetClientCredentialsAuthTokenQuery authTokenQuery)
     {
         var authTokenResponse = await Mediator.Send(authTokenQuery);
-        if (!string.IsNullOrWhiteSpace(authTokenResponse.access_token))
-            return Results.Ok(authTokenResponse);
-
-        return Results.Unauthorized();
+        return !string.IsNullOrWhiteSpace(authTokenResponse.access_token) ? Results.Ok(authTokenResponse) : Results.Unauthorized();
     }
 
     [HttpPost("register")]

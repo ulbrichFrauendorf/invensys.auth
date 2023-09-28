@@ -2,25 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-landing-dashboard',
-  templateUrl: './landing-dashboard.component.html',
-  styleUrls: ['./landing-dashboard.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class LandingDashboardComponent implements OnInit {
-    registerMode = true;
+export class DashboardComponent implements OnInit {
     users:any =null;
 
     constructor(private httpClient: HttpClient){}
     ngOnInit(): void {
        this.getUsers();
-    }
-
-    toggleRegisterMode(){
-        this.registerMode = !this.registerMode;
-    }
-
-    cancelRegisterMode(event:boolean){
-        this.registerMode = event;
     }
     
     getUsers(){
