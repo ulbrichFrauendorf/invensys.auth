@@ -1,5 +1,6 @@
 using invensys.auth.infrastructure;
 using invensys.auth.application;
+using invensys.auth.server.ExeptionHandlers;
 using invensys.auth.server.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,12 +26,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseMiddleware<ApiExceptionHandlerMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors();
 app.UseHttpsRedirection();
 

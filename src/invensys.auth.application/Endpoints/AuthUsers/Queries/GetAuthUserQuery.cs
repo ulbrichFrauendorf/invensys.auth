@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using invensys.auth.application.Common.Exceptions;
 using invensys.auth.application.Common.Interfaces;
+using invensys.auth.domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +21,22 @@ public class GetAuthUserQueryHandler : EndpointHandler, IRequestHandler<GetAuthU
     public async Task<AuthUserDTO> Handle(GetAuthUserQuery request, CancellationToken cancellationToken)
     {
         var authUser = await _context.AuthUsers.SingleOrDefaultAsync(s => s.AuthUserId == request.AuthUserId, cancellationToken: cancellationToken);
+
+        if (authUser == null)
+        {
+            throw new NotFoundException(nameof(AuthUser),request.AuthUserId);
+        }
+        
         return _mapper.Map<AuthUserDTO>(authUser);
+    }
+}
+
+public class GetAuthUserQueryValidator : AbstractValidator<GetAuthUserQuery>
+{
+    public GetAuthUserQueryValidator()
+    {
+        RuleFor(v => v.AuthUserId)
+            .Must(x=> Guid.TryParse(x, out _))
+            .NotEmpty();
     }
 }

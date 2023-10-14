@@ -28,8 +28,4 @@
     <ProjectReference Include="..\invensys.auth.domain\invensys.auth.domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataServices\" />
-  </ItemGroup>
-
 </Project>

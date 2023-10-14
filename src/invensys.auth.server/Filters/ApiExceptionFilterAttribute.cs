@@ -16,7 +16,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 { typeof(ValidationException), HandleValidationException },
                 { typeof(NotFoundException), HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
-                { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
+                { typeof(ForbiddenAccessException), HandleForbiddenAccessException }
             };
     }
 
@@ -90,7 +90,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         var details = new ProblemDetails
         {
             Status = StatusCodes.Status401Unauthorized,
-            Title = "Unauthorized",
+            Title = "Unauthorized to use endpoint",
             Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
         };
 
