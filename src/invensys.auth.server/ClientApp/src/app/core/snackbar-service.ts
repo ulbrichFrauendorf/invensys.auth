@@ -21,6 +21,14 @@ export class SnackbarService {
         });
     }
 
+    public getApiErrorSnackBar(errorStatus:string, errorMessage:string): void {
+        this.snackBar.open(`${errorMessage} - Status = ${errorStatus}`, "Dismiss", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: this.duration
+        });
+    }
+
     public getCustomSnackbar(customText: string) {
         this.snackBar.open(customText, "Dismiss", {
             horizontalPosition: this.horizontalPosition,
